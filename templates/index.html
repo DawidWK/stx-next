@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<form
+  style="display: flex; justify-content: space-between"
+  action="/"
+  method="get"
+>
+  {{ form.as_p }}
+  <button type="submit">Search</button>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Date Published</th>
+      <th scope="col">Publication Language</th>
+      <th scope="col">Pages</th>
+      <th scope="col">ISBN Number</th>
+      <th scope="col">Cover URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.date_published }}</td>
+      <td>{{ book.publication_language.code }}</td>
+      <td>{{ book.pages }}</td>
+      <td>{{ book.ISBN_number }}</td>
+      <td><a href="{{ book.cover_url }}">LINK</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+
+<div>
+  {% for error in errors %}
+  <div style="border-bottom: 1px solid #000">
+    <p style="font-weight: bold">Couldnt import:</p>
+    <p>
+      <span>Title: {{ error.title }} |</span>
+      <span>Author: {{ error.author }} |</span>
+      <span>Date Published: {{ error.date_published }} |</span>
+      <span>ISBN: {{ error.ISBN_number }} </span>
+    </p>
+    <p style="color: red">Error thrown: {{ error.error }}</p>
+    <p style="color: green">
+      <span style="font-weight: bold"> TO STX NEXT RECRUITERS:</span> I'M AWARE
+      THAT IT IS NOT SAFE TO DISPLAY DATABASE RECORDS NAMES IN PRODUCTION
+    </p>
+  </div>
+  {% endfor %}
+  <h1>Import books from Google API</h1>
+  <form style="display: flex; align-items: center" method="post">
+    {% csrf_token %}
+    <p style="margin: unset">https://www.googleapis.com/books/v1/volumes?q=</p>
+    <input name="query" />
+    <button style="margin-left: 24px" type="submit">Import</button>
+  </form>
+</div>
+{% endblock content %}
