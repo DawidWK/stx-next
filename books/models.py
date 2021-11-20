@@ -1,5 +1,6 @@
 from django.db import models
 from isbn_field import ISBNField
+from django.db.models.signals import post_save
 
 # - Zamodeluj obiekty bazodanowe tak by zawierały pola:
 #  tytuł, autor, data publikacji, numer ISBN, liczba stron,
@@ -34,3 +35,13 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# SIGNALS
+def language_code_to_lower(sender, instance, created, **kwargs):
+    if created:
+        instance.code = instance.code.lower()
+        instance.save()
+
+
+post_save.connect(language_code_to_lower, sender=Language)
