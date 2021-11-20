@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from .models import Book, Author, Language
 from .forms import BookForm, QueryBooksForm
@@ -12,6 +13,9 @@ def books(request):
     books = Book.objects.all()
 
     if request.method == "GET" and request.GET:
+        """
+        When form is submitted it returns only filtered books
+        """
         title = request.GET.get("title")
         author = request.GET.get("author")
         publication_language = request.GET.get("publication_language")
@@ -34,7 +38,6 @@ def books(request):
 
 def import_books(request):
     errors = []
-
     if request.POST:
         query = request.POST["query"]
         r = requests.get("https://www.googleapis.com/books/v1/volumes", {"q": query})
@@ -104,3 +107,7 @@ class BookFormView(CreateView):
         )[0]
         self.object = tmp_form.save()
         return super().form_valid(form)
+
+
+class ApiDocsView(TemplateView):
+    template_name = "api.html"

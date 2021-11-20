@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+<h1>API</h1>
+<p>Api URL: /api/books</p>
+<br />
+<h2>Avaliable queries</h2>
+<p><span>?title=""</span> Filters books that CONTAINS provided title</p>
+<p><span>?author=""</span> Filters books that has provided Author</p>
+<p>
+  <span>?publication_language=""</span> Filters books that has provided
+  publication language
+</p>
+<p>
+  <span>?from_date=""</span> Filters book that has published date greater or
+  equal than provided from_date
+</p>
+<p>
+  <span>?to_date=""</span> Filters book that has published date, less or equal
+  than provided to_date
+</p>
+<p>Example: /api/books?title="flowers"?from_date=1990?to_date=2004</p>
+<br />
+<h2>POST request /api/books to create new record</h2>
+{% endblock content %}
