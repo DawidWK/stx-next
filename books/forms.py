@@ -3,8 +3,8 @@ from .models import Book
 
 
 class QueryBooksForm(forms.ModelForm):
-    from_date = forms.DateField()
-    to_date = forms.DateField()
+    from_date = forms.DateField(widget=forms.TextInput(attrs={"placeholder": "YYYY"}))
+    to_date = forms.DateField(widget=forms.TextInput(attrs={"placeholder": "YYYY"}))
 
     class Meta:
         model = Book
