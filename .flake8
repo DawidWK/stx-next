@@ -1,2 +1,8 @@
 [flake8]
 ignore = E501
+exclude =
+    .git,
+    __pycache__,
+    old,
+    build,
+    env
